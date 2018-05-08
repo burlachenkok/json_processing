@@ -7,9 +7,13 @@ This script should be used in the way that it is console user interface program:
 Goal is to handle several usefull things for text JSON representaion which can be considered as hierarchical representaion of data:
 
 [1] extract some variable from JSON object by path
+
 [2] extract some variable from JSON object by path and evaluated arbitarily Python expression on this variable. To reference to variable use "value" in your expression
+
 [3] delete some variable from JSON object by path
+
 [4] set some variable to specific value if previously variable was contained within JSON object
+
 [5] set some variable to specific value if previously variable was not contained within JSON object
 
 # Input format
