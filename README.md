@@ -13,10 +13,9 @@ Input is reading from stdin as it's a textfile in format:
 
 `...`
   
-Where:
 
-<TAB> -- is tab symbol
-<LF> -- is line feeding, a.k.a new line.
+`<TAB>` -- is tab symbol
+`<LF>` -- is line feeding, a.k.a new line.
 
 So before use this script you should convert text representation of JSON object into representation which doesn't include line feeding.
 
