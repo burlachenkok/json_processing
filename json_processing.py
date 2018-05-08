@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Copyright (c) 2018, Konstantin Burlachenko (burlachenkok@gmail.com).  All rights reserved.
+# Consolde based application for manipulation with JSON data
+
 import sys, json, argparse, math
 
 def dumpKeyInfo(key, value):
