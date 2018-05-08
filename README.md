@@ -1,13 +1,17 @@
-# json_processing script
+# About json_processing script
 
-This is a script for some usefull manipulation with JSON data. I tested this application with Python 2.7*. This script should be used in the way that it is console user interface program:
+This is a python script for some usefull manipulation with JSON data. I tested this application with Python 2.7*. 
+This script should be used in the way that it is console user interface program:
+
+# Input format
 
 Input is reading from stdin as it's a textfile in format:
 
 <USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
 
 <USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
-...
+
+...................................................
   
 Where 
 <TAB> -- is tab symbol
@@ -24,8 +28,8 @@ Goal is to handle several usefull things for text JSON representaion which can b
 [4] set some variable to specific value if previously variable was not contained within JSON object
 
 # Actual Source code for script
-
-https://github.com/burlachenkok/
+[1] Repository with script https://github.com/burlachenkok/json_processing
+[2] Script itself: https://github.com/burlachenkok/json_processing/blob/master/json_processing.py
 
 # Author
 Konstantin Burlachenko (burlachenkok@gmail.com)
