@@ -1,0 +1,29 @@
++ PATH_TO_SCRIPT=./../
++ cat test_input_for_process.json
+FIRST	{   "firstName": "John",   "lastName": "Smith",   "isAlive": true,   "age": 27,   "address": {     "streetAddress": "21 2nd Street",     "city": "New York",     "state": "NY",     "postalCode": "10021-3100"   },   "phoneNumbers": [     {       "type": "home",       "number": "212 555-1234"     },     {       "type": "office",       "number": "646 555-4567"     },     {       "type": "mobile",       "number": "123 456-7890"     }   ],   "children": [],   "spouse": null } + cat test_input_for_process.json
++ ./..//json_processing.py get -p isAlive
+FIRST	True
++ cat test_input_for_process.json
++ ./..//json_processing.py get -p phoneNumbers
+FIRST	[{"type": "home", "number": "212 555-1234"}, {"type": "office", "number": "646 555-4567"}, {"type": "mobile", "number": "123 456-7890"}]
++ cat test_input_for_process.json
++ ./..//json_processing.py get -p phoneNumbers/1
+FIRST	{"type": "office", "number": "646 555-4567"}
++ cat test_input_for_process.json
++ ./..//json_processing.py get -p phoneNumbers/0
+FIRST	{"type": "home", "number": "212 555-1234"}
++ cat test_input_for_process.json
++ ./..//json_processing.py del -p phoneNumbers/0
+FIRST	{"phoneNumbers": [{"type": "office", "number": "646 555-4567"}, {"type": "mobile", "number": "123 456-7890"}], "isAlive": true, "firstName": "John", "lastName": "Smith", "age": 27, "address": {"postalCode": "10021-3100", "city": "New York", "streetAddress": "21 2nd Street", "state": "NY"}, "spouse": null, "children": []}
++ cat test_input_for_process.json
++ ./..//json_processing.py del -p phoneNumbers/1
+FIRST	{"phoneNumbers": [{"type": "home", "number": "212 555-1234"}, {"type": "mobile", "number": "123 456-7890"}], "isAlive": true, "firstName": "John", "lastName": "Smith", "age": 27, "address": {"postalCode": "10021-3100", "city": "New York", "streetAddress": "21 2nd Street", "state": "NY"}, "spouse": null, "children": []}
++ cat test_input_for_process.json
++ ./..//json_processing.py set -p firstName -v 'Stephen P.' -t str
+FIRST	{"phoneNumbers": [{"type": "home", "number": "212 555-1234"}, {"type": "office", "number": "646 555-4567"}, {"type": "mobile", "number": "123 456-7890"}], "isAlive": true, "firstName": "Stephen P.", "lastName": "Smith", "age": 27, "address": {"postalCode": "10021-3100", "city": "New York", "streetAddress": "21 2nd Street", "state": "NY"}, "spouse": null, "children": []}
++ cat test_input_for_process.json
++ ./..//json_processing.py set -p newIntField -v 10 -t int
+FIRST	{"phoneNumbers": [{"type": "home", "number": "212 555-1234"}, {"type": "office", "number": "646 555-4567"}, {"type": "mobile", "number": "123 456-7890"}], "isAlive": true, "firstName": "John", "lastName": "Smith", "age": 27, "newIntField": 10, "address": {"postalCode": "10021-3100", "city": "New York", "streetAddress": "21 2nd Street", "state": "NY"}, "spouse": null, "children": []}
++ cat test_input_for_process.json
++ ./..//json_processing.py get -p age -e ' "My age is " + str(value) '
+FIRST	My age is 27
