@@ -47,7 +47,7 @@ Konstantin Burlachenko (burlachenkok@gmail.com)
 
 [1] Example of usage https://github.com/burlachenkok/json_processing/blob/master/example/demo.sh
 
-[2] Data for example https://github.com/burlachenkok/json_processing/blob/master/example 
+[2] Orirginal data, prepared data for example and demo.sh text output: https://github.com/burlachenkok/json_processing/blob/master/example
 
 
 
