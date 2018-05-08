@@ -44,9 +44,10 @@ I tested this application with Python 2.7*.
 Konstantin Burlachenko (burlachenkok@gmail.com)
 
 # Various links
-1. Example of usage https://github.com/burlachenkok/json_processing/blob/master/example/demo.sh
 
-2. Data for example https://github.com/burlachenkok/json_processing/blob/master/example 
+[1] Example of usage https://github.com/burlachenkok/json_processing/blob/master/example/demo.sh
+
+[2] Data for example https://github.com/burlachenkok/json_processing/blob/master/example 
 
 
 
