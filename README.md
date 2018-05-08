@@ -1,7 +1,6 @@
 # About json_processing script
 
-This is a python script for some usefull manipulation with JSON data. I tested this application with Python 2.7*. 
-This script should be used in the way that it is console user interface program:
+This is python script which can be used as console user interface program or python module to perform some usefull manipulation with JSON data.
 
 # Features
 Goal is to handle several usefull things for text JSON representaion which can be considered as hierarchical representaion of data:
@@ -33,11 +32,13 @@ Input is reading from stdin as it's a textfile in format:
 
 So before use this script you should convert text representation of JSON object into representation which doesn't include line feeding.
 
-# Actual Source code for script
+# Reference to Source code and repository
 
 [1] Repository with script https://github.com/burlachenkok/json_processing
 
 [2] Script itself: https://github.com/burlachenkok/json_processing/blob/master/json_processing.py
+I tested this application with Python 2.7*. 
+
 
 # Author
 Konstantin Burlachenko (burlachenkok@gmail.com)
