@@ -3,9 +3,12 @@
 This is a script for some usefull manipulation with JSON data. I tested this application with Python 2.7*. This script should be used in the way that it is console user interface program:
 
 Input is reading from stdin as it's a textfile in format:
+
 <USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
+
 <USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
 ...
+  
 Where 
 <TAB> -- is tab symbol
 <LF> -- is line feeding, a.k.a new line.
@@ -28,6 +31,5 @@ https://github.com/burlachenkok/
 Konstantin Burlachenko (burlachenkok@gmail.com)
 
 # Various links
-1. 
-2. 
-3. 
+1. Example of usage https://github.com/burlachenkok/json_processing/blob/master/example/demo.sh
+2. Data for example https://github.com/burlachenkok/json_processing/blob/master/example 
