@@ -7,13 +7,14 @@ This script should be used in the way that it is console user interface program:
 
 Input is reading from stdin as it's a textfile in format:
 
-<USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
+`<USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>`
 
-<USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>
+`<USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>`
 
-...................................................
+`...`
   
-Where 
+Where:
+
 <TAB> -- is tab symbol
 <LF> -- is line feeding, a.k.a new line.
 
