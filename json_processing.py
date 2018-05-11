@@ -6,13 +6,13 @@
 
 import sys, json, argparse, math
 
-def dumpKeyInfo(key, value):
+def dumpKeyInfo(outStream, key, value):
     output = u"%s\t%s\n" % (key, value)
-    sys.stdout.write(output.encode('utf8', 'ignore'))
+    outStream.write(output.encode('utf8', 'ignore'))
 
 def ArgParseCommandLine():
     parser = argparse.ArgumentParser(add_help=True, version='1.0',
-                                     description='Read from stdin <key> <TAB> <json data> <LF>\n' +
+                                     description='By default read from stdin <key> <TAB> <json data> <LF>\n' +
                                                  'Perform simple actions on json data and dump result to stdout')
 
     subparsers = parser.add_subparsers(help='get|set|del')
@@ -21,6 +21,9 @@ def ArgParseCommandLine():
                                                    '\nWrite to stdout <expt(value)> <key>')
     get_parser.add_argument('-p', '--path', required=True,  action='store', help='Slash style path to something in <json data>.')
     get_parser.add_argument('-e', '--expr', required=False, action='store', help='Some python eval code per extract arg, which is stored in "value" variable"')
+    get_parser.add_argument('-i', '--input',   required=False, action='store', help='Filename of input file with stored JSON representation for load"')
+    get_parser.add_argument('-ink', '--input_no_key',   required=False, action='store', help='Filename of input file with stored single JSON object for load without key information"')
+    get_parser.add_argument('-o', '--output',  required=False, action='store', help='Filename of output file with stored JSON representation for write output"')
     get_parser.set_defaults(mode='get')
 
     # set supparser
@@ -29,12 +32,18 @@ def ArgParseCommandLine():
     set_parser.add_argument('-p', '--path',  required=True,  action='store', help='Slash style path to something in <json data>.')
     set_parser.add_argument('-v', '--value', required=True,  action='store', help='Setuped value')
     set_parser.add_argument('-t', '--type',  required=True,  action='store', choices = ['int','float','str','bool','json'], help='Value type. In that type data will be setuped in json')
+    set_parser.add_argument('-i', '--input',    required=False, action='store', help='Filename of input file with stored JSON representation for load"')
+    set_parser.add_argument('-ink', '--input_no_key',   required=False, action='store', help='Filename of input file with stored single JSON object for load without key information"')
+    set_parser.add_argument('-o', '--output',   required=False, action='store', help='Filename of output file with stored JSON representation for write output"')
     set_parser.set_defaults(mode='set')
 
     # del supparser
     del_parser = subparsers.add_parser('del', help='Delete something in json serailized data and prtin to stdout new value' +
                                                '\nWrite to stdout <key>\\t<new json>')
     del_parser.add_argument('-p', '--path', action='store', help='Slash style path to remove json data in <json data>.')
+    del_parser.add_argument('-i', '--input',  required=False, action='store', help='Filename of input file with stored JSON representation for load"')
+    del_parser.add_argument('-ink', '--input_no_key',   required=False, action='store', help='Filename of input file with stored single JSON object for load without key information"')
+    del_parser.add_argument('-o', '--output', required=False, action='store', help='Filename of output file with stored JSON representation for write output"')
     del_parser.set_defaults(mode='del')
     return parser.parse_args()
 
@@ -60,8 +69,8 @@ TypeConverter = {"int"   : lambda x : int(x),
                  "bool"  : lambda x : bool(x),
                  "json"  : lambda x : json.loads(x)}
 
-def ProcessTextStream(args, stream, getKeyValue):
-    for line in stream:
+def ProcessTextStream(args, streamIn, streamOut, getKeyValue):
+    for line in streamIn:
         if len(line.strip()) == 0:
             continue
 
@@ -85,16 +94,38 @@ def ProcessTextStream(args, stream, getKeyValue):
                 convert_value = eval(args.expr)
             if (isinstance(convert_value, dict) or isinstance(convert_value, list)):
                 convert_value = json.dumps(convert_value)
-            dumpKeyInfo(key, convert_value)
+            dumpKeyInfo(streamOut, key, convert_value)
         elif (args.mode == "set"):
             if trav != None:
                 trav[lst_path] = TypeConverter[args.type](args.value)
-            dumpKeyInfo(key, json.dumps(decoded))
+            dumpKeyInfo(streamOut, key, json.dumps(decoded))
         elif (args.mode == "del"):
             if trav != None:
                 del trav[lst_path]
-            dumpKeyInfo(key, json.dumps(decoded))
+            dumpKeyInfo(streamOut, key, json.dumps(decoded))
 
 if __name__ == '__main__':
     args = ArgParseCommandLine()
-    ProcessTextStream(args, sys.stdin, lambda line : line.strip("\r\n").split("\t", 1))
+    finput = sys.stdin
+    foutput = sys.stdout
+
+    if args.input != None and args.input_no_key != None:
+        print >> sys.stderr, "You provide 'input' and 'input_no_key' simulatenously. It's prohibited."
+        sys.exit(-1)
+
+    if args.input != None: 
+        finput = open(args.input, "rb")
+    if args.output != None: 
+        foutput = open(args.output, "wb")
+    if args.input_no_key != None: 
+        finput = open(args.input_no_key, "rb")
+        finput = ["file:" + args.input_no_key + "\t" + finput.read().replace("\r\n", "").replace("\n", "")]
+
+    ProcessTextStream(args, finput, foutput, lambda line : line.strip("\r\n").split("\t", 1))
+
+    if args.input != None:
+        finput.close()
+    if args.output != None: 
+        foutput.close()
+
+
