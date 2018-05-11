@@ -18,7 +18,7 @@ Goal is to handle several usefull things for text JSON representaion which can b
 # Input
 There are 3 format of input data.
 
-Format-1: By default mode input is reading from stdin as it's a textfile in format:
+*Format-1:* By default mode input is reading from stdin as it's a textfile in format:
 
 `<USER_DEFINED_KEY> <TAB> <JSON_REPRESENTATION> <LF>`
 
@@ -33,9 +33,9 @@ Format-1: By default mode input is reading from stdin as it's a textfile in form
 
 So before use this script you should convert text representation of JSON object into representation which doesn't include line feeding.
 
-Format-2: You can specify input filename by `-i` or `--input` parameter.  Format of input is the same as in Format-1.
+*Format-2:* You can specify input filename by `-i` or `--input` parameter.  Format of input is the same as in Format-1.
 
-Format-3: You can specify input filename by `-ink` or `--input_no_key` parameter. In this mode text there is no key information and content of all file represent single json object.
+*Format-3:* You can specify input filename by `-ink` or `--input_no_key` parameter. In this mode text there is no key information and content of all file represent single json object.
 
 # Output
 
