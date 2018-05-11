@@ -13,3 +13,5 @@ cat test_input_for_process.json | ${PATH_TO_SCRIPT}/json_processing.py set -p "f
 cat test_input_for_process.json | ${PATH_TO_SCRIPT}/json_processing.py set -p "newIntField" -v "10" -t int
 cat test_input_for_process.json | ${PATH_TO_SCRIPT}/json_processing.py get -p "age" -e " \"My age is \" + str(value) "
 
+${PATH_TO_SCRIPT}/json_processing.py get -p "isAlive" -i "test_input_for_process.json"
+${PATH_TO_SCRIPT}/json_processing.py get -p "isAlive" --input_no_key "test_input_orig.json"
